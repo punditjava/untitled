@@ -13,12 +13,23 @@ public class Main {
             System.out.println("Your answer is right!");
         else System.out.println("Your answer is wrong...");
     }
+                      //***МЕНЮ***
+    public static void Menu(ArrayList<Card> cards) throws Exception{
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Input the action (add, remove, import, export, ask, exit):");
+        switch (scan.next()){
+            case "add": Add(cards);Menu(cards);break;
+            case "remove":Remove(cards);Menu(cards);break;
+            case "import":cards=Import();Menu(cards);break;
+            case "export":Export(cards);Menu(cards);break;
+            case "exit": System.exit(0);
+            default: Menu(cards);
+        }
+    }
 
     public static void main(String[] args) throws Exception {
         ArrayList<Card> Cartonki= Import(); // Главный список
-        Remove(Cartonki);
-        for (Card e: Cartonki)
-            System.out.println(e.getCard()+" "+ e.getDefinition());
+        Menu(Cartonki);
     }
 
 
@@ -54,7 +65,7 @@ public class Main {
               while (i<cards.size()) {
                    if(C.equals(cards.get(i).getCard())){
                   System.out.println("Картонка "+cards.get(i).getCard()+" удалена");
-                   cards.remove(i); i=cards.size();}
+                   cards.remove(i); break;}
                    i++;
               }
               N--;
